@@ -1,30 +1,27 @@
 let express = require ("express");
+let routerTasks = require ("./routers/routerTasks");
+let routerUsers =  require ("./routers/routerUsers");
 let app= express();
-
-let tasks= [
-    {id:1,text:"hacer la compra"},
-    {id:2,text:"pagar la luz"},
-    {id:3,text:"revisar las facturas"}
-];
-let users=[
-    {id:1,email:"user1",password:"user1"},
-    {id:2,email:"user2",password:"user2"}  
-];
-
-//Para mostrar los datos siempre usamos una petición get
-//previa definición de la url que queremos darle
-
-app.get("/tasks", (req,res)=>{
-    res.send(tasks);
-})
-
-app.get("/users", (req,res)=>{
-    res.send(users);
-})
-
-
-
 
 app.listen(8081,()=>{
     console.log("servidor activo");
 })
+
+//para registrar un router entero,primero se le pasa una 
+//url base que se le puede dar a todo el router
+//para url base app.use("/",routerTasks);
+//lo normal si se pone aquí es quitarla del router para no duplicarlo
+
+app.use("/tasks",routerTasks);
+app.use("/users",routerUsers);
+
+
+
+
+
+
+
+
+
+
+
